@@ -150,14 +150,14 @@ class GCNConvCustom(nn.Module):
 # gcn_model_custom.py
 import torch
 import torch.nn.functional as F
-from torch_geometric.nn import GCNConv  # 引入PyTorch Geometric提供的GCNConv
+from gcn_custom_conv import GCNConvCustom  # 引入我们自己实现的图卷积层
 
-class GCN(torch.nn.Module):
+class GCNCustom(torch.nn.Module):
     def __init__(self, num_features, num_classes, hidden_channels=16):
-        super(GCN, self).__init__()
-        # 使用PyTorch Geometric的图卷积层
-        self.conv1 = GCNConv(num_features, hidden_channels)
-        self.conv2 = GCNConv(hidden_channels, num_classes)
+        super(GCNCustom, self).__init__()
+        # 使用自己实现的图卷积层
+        self.conv1 = GCNConvCustom(num_features, hidden_channels)
+        self.conv2 = GCNConvCustom(hidden_channels, num_classes)
 
     def forward(self, x, edge_index):
         # 第一层：图卷积 + ReLU
